@@ -1,0 +1,11 @@
+#!/bin/bash
+
+cat << EOF > /etc/dnsmasq.conf
+user=root
+domain-needed
+bogus-priv
+resolv-file=/etc/resolv.conf
+conf-dir=/etc/dnsmasq.d
+EOF
+
+dnsmasq -d

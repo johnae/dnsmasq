@@ -1,0 +1,14 @@
+#!/bin/bash
+
+IN=$1
+set -- ${IN//,/ }
+
+filename=$(echo "$1" | sed 's/\*/wildcard/g')
+echo "$filename"
+
+cat << EOF > /etc/dnsmasq.d/0_host_$filename
+address=/$1/$2
+EOF
+
+echo "Host config added, don't forget to start or restart your dnsmasq container"
+cat /etc/dnsmasq.d/0_host_$filename
